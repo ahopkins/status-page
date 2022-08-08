@@ -1,0 +1,10 @@
+name: incident-management
+on: [push]
+jobs:
+  sync-issues-to-incidents:
+    runs-on: ubuntu-latest
+    env:
+      MY_NAME: "Mona The Octocat"
+    steps:
+      - name: bash-version
+        run: echo "::add-mask::$MY_NAME"

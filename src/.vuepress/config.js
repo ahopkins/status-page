@@ -31,7 +31,7 @@ module.exports = {
     editLinks: false,
     docsDir: '',
     editLinkText: '',
-    lastUpdated: 'Last Updated',
+    lastUpdated: true,
     nav: [
       {
         text: 'PacketFabric Portal',
