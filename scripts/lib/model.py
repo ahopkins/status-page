@@ -63,3 +63,12 @@ class Outage(BaseModel):
     duration: timedelta
     started_at: datetime
     current: bool
+
+
+class Monitor(BaseModel):
+    url: str
+    title: str
+    label: str
+    passed: bool = False
+    misses: int = 0
+    current_issue: Optional[Issue] = None
