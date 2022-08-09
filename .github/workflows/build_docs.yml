@@ -14,13 +14,16 @@ jobs:
         run: |
           npm install
           npm run build
+      - name: Move dist dir
+        run: mv src/.vuepress/dist ./docs
       - name: Setup environment
         run: |
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
       - name: Commit and push changes
         run: |
-          git checkout -b gh-pages
+          git checkout gh-pages
+          git pull origin gh-pages
           git add -A
           git commit -m "Build pages"
           git push origin gh-pages --force
