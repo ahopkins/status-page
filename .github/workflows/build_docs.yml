@@ -14,16 +14,13 @@ jobs:
         run: |
           npm install
           npm run build
-      - name: Install SSH Client 🔑
-        uses: webfactory/ssh-agent@v0.4.1
-        with:
-          ssh-private-key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@3.7.1
-        with:
-          BASE_BRANCH: main
-          BRANCH: gh-pages
-          FOLDER: docs
-          CLEAN: true
-          SSH: true
+      - name: Setup environment
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+      - name: Commit and push changes
+        run: |
+          git checkout gh-pages
+          git add -A
+          git commit -m "Build pages"
+          git push origin gh-pages

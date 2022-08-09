@@ -18,10 +18,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r ./scripts/requirements.txt
       - name: Sync issues
-        run: python ./scripts/runner.py
-      - name: Setup environment
         env:
           ACCESS_PAT: ${{ secrets.ACCESS_PAT }}
+        run: python ./scripts/runner.py
+      - name: Setup environment
         run: |
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
