@@ -5,6 +5,7 @@
       :incidents="currentIncidents"
       title="Current Incidents"
     />
+    <h2>Current Status</h2>
     <StatusCategory
       v-for="category in categories"
       :key="category.title"
@@ -21,6 +22,7 @@ import IncidentList from "./IncidentList.vue";
 const MAX_INCIDENT_AGE = 1000 * 60 * 60 * 24 * 90; // 90 days
 
 export default {
+  name: "StatusOverview",
   components: { StatusCategory, IncidentList },
   data() {
     const categories = [
@@ -33,8 +35,10 @@ export default {
     ]
       .sort()
       .reduce((o, i) => {
+        console.log(this.$root.$site);
         o[i] = {
-          title: i,
+          label: i,
+          title: this.$root.$site.themeConfig.componentTitles[i],
           components: [],
         };
         return o;
@@ -46,10 +50,10 @@ export default {
       if (x.frontmatter.layout === "ComponentDetail") {
         categories[x.frontmatter.category].components.push(x);
       } else if (x.frontmatter.layout === "IncidentDetail") {
-        if (x.frontmatter.resolved === undefined) {
+        if (x.frontmatter.state !== "closed") {
           currentIncidents.push(x);
         } else {
-          const age = Date.now() - new Date(x.frontmatter.reported);
+          const age = Date.now() - new Date(x.frontmatter.created_at);
           if (age < MAX_INCIDENT_AGE) {
             pastIncidents.push(x);
           }

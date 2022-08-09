@@ -1,7 +1,9 @@
 ---
+category: Web
+component: API
 layout: ComponentDetail
-category: "API"
-status: operational
+status: down
+uptime: 99.44
 ---
 
 # API - General

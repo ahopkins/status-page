@@ -1,10 +1,32 @@
 name: incident-management
-on: [push]
+on:
+  issues:
+    types: [opened, edited, closed, reopened, labeled, unlabeled]
+  issue_comment:
+    types: [created, deleted, edited]
 jobs:
   sync-issues-to-incidents:
     runs-on: ubuntu-latest
-    env:
-      MY_NAME: "Mona The Octocat"
     steps:
-      - name: bash-version
-        run: echo "::add-mask::$MY_NAME"
+      - uses: actions/checkout@v3
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+      - name: Install node dependencies
+        run: npm install
+      - name: Install python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r ./scripts/requirements.txt
+      - name: Sync issues
+        run: python ./scripts/runner.py
+      - name: Setup git config
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+      - name: Commit and push changes
+        run: |
+          git add -A
+          git commit -m "Sync issues to incident"
+          git push origin main
