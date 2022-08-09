@@ -2,7 +2,7 @@
 category: Web
 component: API
 layout: ComponentDetail
-status: down
+status: up
 uptime: 99.32
 ---
 
