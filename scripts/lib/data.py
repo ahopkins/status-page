@@ -22,7 +22,7 @@ def fetch_comments_local(key: str) -> List[Comment]:
 
 def fetch_data() -> List[Issue]:
     # return fetch_data_local()
-    g = Github(environ.get("ACCESS_PAT"))
+    g = Github(environ.get("GITHUB_TOKEN"))
     paginated_list = g.get_repo(environ["GITHUB_REPOSITORY"]).get_issues(state="all", labels=["incident"])
     return [
         Issue(
