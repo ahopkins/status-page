@@ -1,0 +1,4 @@
+PyGithub
+pydantic
+Jinja2
+python-frontmatter

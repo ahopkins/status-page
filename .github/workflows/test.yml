@@ -1,0 +1,24 @@
+# name: test
+# on:
+#   issues:
+#     types: [opened, edited, closed, reopened, labeled, unlabeled]
+# jobs:
+#   test:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v3
+#       - name: Fetching...
+#         uses: actions/github-script@v6
+#         id: set-result
+#         with:
+#           github-token: ${{ secrets.MY_PAT }}
+#           # result-encoding: string
+#           script: |
+#             return github.rest.issues.listForRepo({
+#               owner: "ahopkins",
+#               repo: "status-page",
+#               state: "all",
+#               labels: "incident"
+#             })
+#       - name: Get result
+#         run: echo '"${{steps.set-result.outputs.result}}"'
