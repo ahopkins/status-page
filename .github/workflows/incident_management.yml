@@ -1,4 +1,4 @@
-name: incident-management
+name: Incident Management
 on:
   issues:
     types: [opened, edited, closed, reopened, labeled, unlabeled]
